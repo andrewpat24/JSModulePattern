@@ -12,15 +12,6 @@
 
 ## Modules 
 
-### Immediately-Invoked Function-Expressions (IIEF)
-		    (function () {
-			    //Code goes here  
-		    })(); 
-
-* Creates a new scope for the function so run away scoped variables can’t be accidentally called. 
-* Returns only the parts you need and leaves code out of the global scope. 
-* Enables you to use more common variable names and consistent naming paradigms since they only exist in the scope of this function. 
-* This technique can be used to emulate function or object privacy. 
 
 ### Creating Modules 
 	let Module = (function () {
@@ -29,6 +20,17 @@
 
 * Module is created in the global scope
 * Only functions that are explicitly returned go back to the global scope. Otherwise they stay in the scope of the function and cannot be called outside of it.
+
+### Immediately-Invoked Function-Expressions (IIEF)
+    (function () {
+	    //Code goes here  
+    })(); 
+
+* Creates a new scope for the function so run away scoped variables can’t be accidentally called. 
+* Returns only the parts you need and leaves code out of the global scope. 
+* Enables you to use more common variable names and consistent naming paradigms since they only exist in the scope of this function. 
+* This technique can be used to emulate function or object privacy. 
+
 #### Declaring private method(s) inside module 
 	let Module = (function () {
 		let privateMethod = function () {
@@ -156,7 +158,27 @@ Example:
 		}
 	})(); 
  
+## How to use this thing
+You've actually used this technique before, but without realizing it. 
 
+ $(document).ready is essentially shorthand for this nested function: 
+	
+	(function($){
+	   $(function(){
+	      // Run on DOM ready
+	   });
+	})(jQuery);
+
+Let's look at this in more detail. 
+
+Since we can pull our Jquery definition into 
+
+## Why Should we even use this? 
+As we know, programming in sharepoint can turn into a nightmare if we let it. Be it from multiple js files getting pulled into the same page in multiple different content editors, or just tons of different code getting thrown in together. 
+
+This module pattern lets us modulerize our code so we can not only easily share it with each other, but also know that when we pull different projects together nothing will conflict. 
 
 Sources: 
 * [toddmotto - Mastering the module pattern](https://toddmotto.com/mastering-the-module-pattern/)
+* [How should I initialize Jquery](https://stackoverflow.com/questions/2215904/how-should-i-initialize-jquery) 
+* [What does (function($) {})(jQuery); mean?](https://stackoverflow.com/questions/2937227/what-does-function-jquery-mean)
