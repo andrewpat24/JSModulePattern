@@ -174,11 +174,12 @@ Let's take a look at how we might use this in a project.
 A normal project might look like this. 
 
 	$(document).ready(function() {
-	  var dummyVal = 5; 
+	  // can get called anywhere, should not be accessible anywhere in the program
+	  var privateVal = 5; 
 	  var messageList = []; 
 	  var welcomeMessage = 'abracadabra';
 	
-	  sendMessage(customThingForThisPage); 
+	  sendMessage(welcomeMessage); 
 	  	  
 	  function init() {
 	    // do a lot of things
@@ -215,8 +216,8 @@ Here it is rewritted in the module pattern:
 
 	var myApp = (function($) {
 	  
-	  var privateVal = 5; 
-	  var messageList = []; 
+	  var _privateVal = 5; 
+	  var _messageList = []; 
 	  
 	  var init = function () {
 	    // do a lot of things
