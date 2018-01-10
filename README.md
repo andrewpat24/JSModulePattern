@@ -287,7 +287,12 @@ Many projects being pulled into the same webpage will often throw errors due to 
 ## Conclusion
 Sharepoint has reserved words and characters, and might add more in the future. To make our code not only more maintainable for ourselves through readability, the module pattern greatly reduces ambiguity and scopes your code to only where it's being used.  
 
-Sources: 
+# Information
+
+### Sources: 
 * [toddmotto - Mastering the module pattern](https://toddmotto.com/mastering-the-module-pattern/)
 * [How should I initialize Jquery](https://stackoverflow.com/questions/2215904/how-should-i-initialize-jquery) 
 * [What does (function($) {})(jQuery); mean?](https://stackoverflow.com/questions/2937227/what-does-function-jquery-mean)
+
+### Slide Deck
+https://docs.google.com/presentation/d/1NJZeY_u2_07VsZhf-iQNQyhVLhevnqUoLSN9KBpdDak/edit?usp=sharing
