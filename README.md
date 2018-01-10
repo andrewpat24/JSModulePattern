@@ -169,14 +169,63 @@ You've actually used this technique before, but without realizing it.
 	   });
 	})(jQuery);
 
-Let's look at this in more detail. 
+Let's take a look at how we might use this in a project.
 
-Since we can pull our Jquery definition into 
+A normal project might look like this. 
 
-## Why Should we even use this? 
+	$(document).ready(function() {
+	  var dummyVal = 5; 
+	  var messageList = []; 
+	  var customThingForThisPage= 'abracadabra';
+	  
+	  displaySpecialMessage(customThingForThisPage); 
+	  	  
+	  function init() {
+	    // do a lot of things
+	  }
+	  
+	  function fixesWeirdProblemWithThisSpecificPage() {
+	    // code in here
+	  }
+	  
+	  // all these functions get hoisted, meaning they can be called anywhere. 
+	  function showMessage() {
+	    // code in here
+	  }
+	  
+	  function getMessage() {
+	    // code in here
+	  }
+	  
+	  function fixesProblemCausedByOtherFileInPage() {
+	    // code in here
+	  }
+	  
+	  function sendMessage() {
+	    // code in here
+	  }
+	  
+	  function displaySpecialMessage(message) {
+	    // code in here
+	  }
+	});
+
+
+## Why even do this? 
 As we know, programming in sharepoint can turn into a nightmare if we let it. Be it from multiple js files getting pulled into the same page in multiple different content editors, or just tons of different code getting thrown in together. 
 
 This module pattern lets us modulerize our code so we can not only easily share it with each other, but also know that when we pull different projects together nothing will conflict. 
+
+* You'll be able to make reusable modules that can be used in any codebase, since they're only scoped to be within themselves, shut off from everything outside of them. 
+* You'll be able to write clean, maintainable code that's easy to read and change. 
+* You'll be able to debug much quicker, since you only need to look at the code partitioned within the module. 
+
+
+### Example: 
+Many projects being pulled into the same webpage will often throw errors due to multiple initializations of jQuery. Your project won't know which version to use, nor will anyone else's. And as a result, reduce the productivity of every dev working on the project. 
+
+## Conclusion
+Sharepoint has reserved words and characters, and might add more in the future. To make our code not only more maintainable for ourselves through readability, the module pattern greatly reduces ambiguity and scopes your code to only where it's being used.  
 
 Sources: 
 * [toddmotto - Mastering the module pattern](https://toddmotto.com/mastering-the-module-pattern/)
