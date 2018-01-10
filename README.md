@@ -176,9 +176,9 @@ A normal project might look like this.
 	$(document).ready(function() {
 	  var dummyVal = 5; 
 	  var messageList = []; 
-	  var customThingForThisPage= 'abracadabra';
-	  
-	  displaySpecialMessage(customThingForThisPage); 
+	  var welcomeMessage = 'abracadabra';
+	
+	  sendMessage(customThingForThisPage); 
 	  	  
 	  function init() {
 	    // do a lot of things
@@ -201,18 +201,77 @@ A normal project might look like this.
 	    // code in here
 	  }
 	  
-	  function sendMessage() {
+	  function sendMessage(message) {
 	    // code in here
 	  }
 	  
-	  function displaySpecialMessage(message) {
+	});
+
+If you wanted to reuse any code in this program, you'd have to discern what parts are used for this page, and what is useful for your project. 
+
+Not only that, but since our functions are declared in as "function functionName () {}" they're getting hoisted, making room for potential bugs or errors. 
+
+Here it is rewritted in the module pattern: 
+
+	var myApp = (function($) {
+	  
+	  var privateVal = 5; 
+	  var messageList = []; 
+	  
+	  var init = function () {
+	    // do a lot of things
+	  }
+	  
+	  // functions created as var name = function() {} don't get hoisted
+	  var showMessage = function () {
 	    // code in here
 	  }
+	  
+	  var getMessages = function () {
+	    // code in here
+	    return messageList; 
+	  }
+	  
+	  var sendMessage = function () {
+	    // code in here
+	  }
+	  
+	  return {
+	    init: init,
+	    showMessage: showMessage,
+	    getMessage: getMessages, 
+	    sendMessage: sendMessage
+	  };
+	  
+	})(Jquery);
+
+	$(document).ready(function() {
+	  myApp.init(); 
+	  
+	  var welcomeMessage = 'abracadabra';
+	  myApp.sendMessage(welcomeMessage);
+	  
+	  var fixesWeirdProblemWithThisSpecificPage = function () {
+	    // code in here
+	  }
+	 
+	  var fixesProblemCausedByOtherFileInPage = function () {
+	    // code in here
+	  }
+	  
+	  var sharepointMagic = function () {
+	    // code in here
+	  }
+	  
 	});
+
+Now, if someone wants to reuse our code, all they have to do is take duplicate myApp! 
+
+
 
 
 ## Why even do this? 
-As we know, programming in sharepoint can turn into a nightmare if we let it. Be it from multiple js files getting pulled into the same page in multiple different content editors, or just tons of different code getting thrown in together. 
+As we know, programming in sharepoint can turn into a nightmare if we let it. Be it from multiple js files getting pulled into the same page in multiple different content editors, or just tons of different snippets getting tossed into the same index file. 
 
 This module pattern lets us modulerize our code so we can not only easily share it with each other, but also know that when we pull different projects together nothing will conflict. 
 
